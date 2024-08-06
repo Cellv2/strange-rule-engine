@@ -7,18 +7,44 @@ public abstract class Rule<T> : IRule<T>
 
 public abstract class RuleEngine<T>
 {
-    public T Ctx { get; set; }
-
     public IEnumerable<Rule<T>> Rules { get; set; }
+}
 
-    public virtual IDictionary<string, string> All(string valid = "Ok")
+public class MessageFunctions
+{
+    string[] rules = ["SendTheMessage"];
+
+    public string? GetValue(string ruleName)
     {
-        return Rules
-                 .Where(r => r.IsValid(Ctx) == false)
-                 .Select(r => new KeyValuePair<string, string>(
-                     r.ReasonIfFails, nameof(r)
-                 ))
-                 .ToDictionary(pair => pair.Key, pair => pair.Value);
+        if (!rules.Contains(ruleName))
+        {
+            return null;
+        }
+
+        return (ruleName) switch
+        {
+            "SendTheMessage" => TheFunctions.SendTheMessage("this is the message"),
+            _ => null
+        };
+    }
+}
+
+public class IntegerFunctions
+{
+    string[] rules = ["RandomInt", "RandomInt2"];
+
+    public int? GetValue(string ruleName)
+    {
+        if (!rules.Contains(ruleName)) {
+            return null;
+        }
+
+        return (ruleName) switch
+        {
+            "RandomInt" => TheFunctions.RandomInt(1, 2),
+            "RandomInt2" => TheFunctions.RandomInt(100, 200),
+            _ => null
+        };
     }
 }
 

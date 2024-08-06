@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RuleEngine.Models.Configuration;
+using RuleEngine.Services;
 using Serilog;
 
 // See https://aka.ms/new-console-template for more information
@@ -14,12 +15,12 @@ Log.Information("Starting up");
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => {
+        services.AddOptions<CheckSettings>().BindConfiguration(nameof(CheckSettings));
 
-        //services.AddOptions<TestSettings>().Configure<IConfiguration>((options, configuration) => configuration.GetSection(nameof(TestSettings)).Bind(options));
-
-        //services.AddSingleton<IBarService, BarService>();
-        //services.AddSingleton<IFooService, FooService>();
-
+        services.AddSingleton<ICheckService, CheckService>();
     })
     .UseSerilog()
     .Build();
+
+var checkService = host.Services.GetRequiredService<ICheckService>();
+checkService.DoTheChecks();
