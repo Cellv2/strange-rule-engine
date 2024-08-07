@@ -10,11 +10,11 @@ public abstract class RuleEngine<T>
     public IEnumerable<Rule<T>> Rules { get; set; }
 }
 
-public class MessageFunctions
+public sealed class MessageValidator
 {
     string[] rules = ["SendTheMessage"];
 
-    public string? GetValue(string ruleName)
+    public string? IsValid(string ruleName)
     {
         if (!rules.Contains(ruleName))
         {
@@ -29,11 +29,11 @@ public class MessageFunctions
     }
 }
 
-public class IntegerFunctions
+public sealed class NumberValidator
 {
     string[] rules = ["RandomInt", "RandomInt2"];
 
-    public int? GetValue(string ruleName)
+    public int? IsValid(string ruleName)
     {
         if (!rules.Contains(ruleName)) {
             return null;

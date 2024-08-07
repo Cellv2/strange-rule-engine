@@ -18,6 +18,8 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddOptions<CheckSettings>().BindConfiguration(nameof(CheckSettings));
 
         services.AddSingleton<ICheckService, CheckService>();
+        services.AddSingleton<IMessageService, MessageService>();
+        services.AddSingleton<INumberService, NumberService>();
     })
     .UseSerilog()
     .Build();

@@ -1,7 +1,7 @@
-﻿namespace RuleEngine.Models
+﻿namespace RuleEngine.Models;
+
+public interface IRule
 {
-    public interface IRule<T>
-    {
-        bool IsValid(T value);
-    }
+    public abstract string[] RulesToProcess { get; }
+    public abstract bool IsValid();
 }
