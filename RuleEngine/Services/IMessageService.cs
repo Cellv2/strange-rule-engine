@@ -1,7 +1,6 @@
-﻿namespace RuleEngine.Services
+﻿namespace RuleEngine.Services;
+
+public interface IMessageService
 {
-    public interface IMessageService
-    {
-        string SendTheMessage(string message);
-    }
+    bool IsMessageValid(string message);
 }

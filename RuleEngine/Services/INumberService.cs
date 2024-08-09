@@ -1,7 +1,6 @@
-﻿namespace RuleEngine.Services
+﻿namespace RuleEngine.Services;
+
+public interface INumberService
 {
-    public interface INumberService
-    {
-        int RandomInt(int min, int max);
-    }
+    bool RandomInt(int number);
 }

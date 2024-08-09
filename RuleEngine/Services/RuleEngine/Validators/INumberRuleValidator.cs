@@ -1,6 +1,6 @@
 ﻿namespace RuleEngine.Services.RuleProcessor.Validators;
 
-public interface INumberValidator : IValidatorBase
+public interface INumberRuleValidator : IRuleValidatorBase
 {
 
 }

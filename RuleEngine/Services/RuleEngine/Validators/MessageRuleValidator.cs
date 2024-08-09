@@ -2,9 +2,9 @@
 
 namespace RuleEngine.Services.RuleEngine.Validators;
 
-public sealed class NumberValidator : INumberValidator
+public sealed class MessageRuleValidator(IMessageService messageService) : IMessageRuleValidator
 {
-    public string[] RulesToProcess => ["RandomInt", "RandomInt2"];
+    public string[] RulesToProcess => ["SendTheMessage"];
 
     public bool? IsValid(string ruleName)
     {
@@ -15,8 +15,7 @@ public sealed class NumberValidator : INumberValidator
 
         return ruleName switch
         {
-            "RandomInt" => TheFunctions.RandomInt(1, 2),
-            "RandomInt2" => TheFunctions.RandomInt(100, 200),
+            "SendTheMessage" => messageService.IsMessageValid("this is the message"),
             _ => null
         };
     }

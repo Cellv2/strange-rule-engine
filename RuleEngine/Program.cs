@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using RuleEngine.Models.Configuration;
 using RuleEngine.Services;
+using RuleEngine.Services.RuleEngine.Validators;
+using RuleEngine.Services.RuleProcessor.Validators;
 using Serilog;
 
 // See https://aka.ms/new-console-template for more information
@@ -16,6 +19,11 @@ Log.Information("Starting up");
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services => {
         services.AddOptions<CheckSettings>().BindConfiguration(nameof(CheckSettings));
+
+        services.TryAddEnumerable([
+            ServiceDescriptor.Singleton<IRuleValidatorBase, MessageRuleValidator>(),
+            ServiceDescriptor.Singleton<IRuleValidatorBase, NumberRuleValidator>()
+        ]);
 
         services.AddSingleton<ICheckService, CheckService>();
         services.AddSingleton<IMessageService, MessageService>();
