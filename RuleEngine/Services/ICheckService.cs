@@ -1,7 +1,6 @@
-﻿namespace RuleEngine.Services
+﻿namespace RuleEngine.Services;
+
+public interface ICheckService
 {
-    public interface ICheckService
-    {
-        void DoTheChecks();
-    }
+    bool DoTheChecks();
 }

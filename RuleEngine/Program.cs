@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using RuleEngine.Models.Configuration;
 using RuleEngine.Services;
 using RuleEngine.Services.RuleEngine.Validators;
+using RuleEngine.Services.RuleProcessor;
 using RuleEngine.Services.RuleProcessor.Validators;
 using Serilog;
 
@@ -28,6 +29,7 @@ var host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<ICheckService, CheckService>();
         services.AddSingleton<IMessageService, MessageService>();
         services.AddSingleton<INumberService, NumberService>();
+        services.AddSingleton<IRuleProcessor, RuleProcessor>();
     })
     .UseSerilog()
     .Build();

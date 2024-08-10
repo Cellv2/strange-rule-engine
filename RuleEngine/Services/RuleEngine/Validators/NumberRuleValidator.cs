@@ -4,7 +4,7 @@ namespace RuleEngine.Services.RuleEngine.Validators;
 
 public sealed class NumberRuleValidator(INumberService numberService) : INumberRuleValidator
 {
-    public string[] RulesToProcess => ["RandomInt", "RandomInt2"];
+    public string[] RulesToProcess => ["IntChecksEnabled", "RandomInt", "RandomInt2"];
 
     public bool? IsValid(string ruleName)
     {
@@ -15,6 +15,7 @@ public sealed class NumberRuleValidator(INumberService numberService) : INumberR
 
         return ruleName switch
         {
+            "IntChecksEnabled" => numberService.RandomInt(5),
             "RandomInt" => numberService.RandomInt(5),
             "RandomInt2" => numberService.RandomInt(10),
             _ => null
